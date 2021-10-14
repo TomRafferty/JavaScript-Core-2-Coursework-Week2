@@ -1,10 +1,34 @@
 function highlightWords(paragraph, colours) {
-  // Write your code here...
+  // this is a right mess right now
   const contentEl = document.getElementById("content");
-  //create the p element
-  const para = document.createElement("p");
-  para.innerHTML = paragraph;
-  contentEl.appendChild(para);
+  //create the p element (now create one for each word) + span
+  const paraSep = paragraph.split(" ");
+  for(let i = 0; i < paraSep.length; i++){
+    const pEl = document.createElement("p");
+    const pObj = {
+      isChecked : false
+    }
+    pEl.style.display = "inline-block";
+    //add spaces
+    if(i < paraSep.length - 1){
+      pEl.innerHTML = `${paraSep[i]}&nbsp`;
+    }else{
+      pEl.innerHTML = paraSep[i];
+    }
+    function highlight() {
+      console.log("called")
+      if (listItemObject.isChecked) {
+        pEl.style.textDecoration = "none";
+        pEl.isChecked = false;
+      } else {
+        pEl.style.textDecoration = "line-through";
+        pEl.isChecked = true;
+      }
+    }
+    pEl.addEventListener("click", highlight)
+    contentEl.appendChild(pEl);
+  }
+  
 
   //add the select element
   const selectEl = document.createElement("select");
@@ -12,8 +36,8 @@ function highlightWords(paragraph, colours) {
   //add the options
   for(let i = 0; i < colours.length; i++){
     let optionEl = document.createElement("option");
-    optionEl.value = colours[i].value;  
-    optionEl.text = colours[i].text;  
+    console.log(colours[i])
+    optionEl.text = colours[i];  
     selectEl.appendChild(optionEl);
   }
 }
