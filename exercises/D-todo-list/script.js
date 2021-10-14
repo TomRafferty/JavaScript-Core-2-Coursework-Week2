@@ -13,23 +13,15 @@ function todoList(todos) {
     const listItemObject = todos[i];
 
     function lineThrough() {
-      listItemEl.style.textDecoration = "line-through";
-      listItemObject.isChecked = true;
-      console.log("wasn't checked, is now checked.");
-      console.log(listItemObject.isChecked);
+      if (listItemObject.isChecked) {
+        listItemEl.style.textDecoration = "none";
+        listItemObject.isChecked = false;
+      } else {
+        listItemEl.style.textDecoration = "line-through";
+        listItemObject.isChecked = true;
+      }
     }
-    function removeLine() {
-      listItemEl.style.textDecoration = "none";
-      listItemObject.isChecked = false;
-      console.log("was checked, not anymore");
-      console.log(listItemObject.isChecked);
-    }
-    if (listItemObject.isChecked === false) {
-      listItemEl.addEventListener("click", lineThrough);
-    }
-    if (listItemObject.isChecked === true) {
-      listItemEl.addEventListener("click", removeLine);
-    }
+    listItemEl.addEventListener("click", lineThrough);
   }
 }
 
