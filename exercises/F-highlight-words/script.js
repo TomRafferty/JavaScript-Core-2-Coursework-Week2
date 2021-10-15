@@ -4,28 +4,33 @@ function highlightWords(paragraph, colours) {
   //create the p element (now create one for each word) + span
   const paraSep = paragraph.split(" ");
   for(let i = 0; i < paraSep.length; i++){
+    //create <p>
     const pEl = document.createElement("p");
+    contentEl.appendChild(pEl);
+    //create <span>
+    const spanEl = document.createElement("span");
+    
+    
     const pObj = {
-      isChecked : false
-    }
+      isChecked: false,
+    };
     pEl.style.display = "inline-block";
     //add spaces
-    if(i < paraSep.length - 1){
-      pEl.innerHTML = `${paraSep[i]}&nbsp`;
-    }else{
-      pEl.innerHTML = paraSep[i];
+    if (i < paraSep.length - 1) {
+      pEl.innerHTML = `${paraSep[i]}&nbsp;`;
+    } else {
+      pEl.innerHTML = `${paraSep[i]}`;
     }
+    pEl.appendChild(spanEl);
     function highlight() {
-      console.log("called")
-      if (listItemObject.isChecked) {
-        pEl.style.textDecoration = "none";
-        pEl.isChecked = false;
-      } else {
-        pEl.style.textDecoration = "line-through";
-        pEl.isChecked = true;
+      console.log(selectEl.options[selectEl.selectedIndex]);
+      if (!pObj.isChecked) {
+        spanEl.style.backgroundColor = selectEl.options[selectEl.selectedIndex];
+        console.log(spanEl);
+        pObj.isChecked;
       }
     }
-    pEl.addEventListener("click", highlight)
+    pEl.addEventListener("click", highlight);
     contentEl.appendChild(pEl);
   }
   
