@@ -1,48 +1,43 @@
 function highlightWords(paragraph, colours) {
-  // this is a right mess right now
   const contentEl = document.getElementById("content");
   //create the p element (now create one for each word) + span
   const paraSep = paragraph.split(" ");
-  for(let i = 0; i < paraSep.length; i++){
-    //create <p>
-    const pEl = document.createElement("p");
-    contentEl.appendChild(pEl);
+
+  //create <p>
+  const pEl = document.createElement("p");
+  contentEl.appendChild(pEl);
+
+  for (let i = 0; i < paraSep.length; i++) {
     //create <span>
-    const spanEl = document.createElement("span");
-    
-    
+    let spanEl = document.createElement("span");
+    spanEl.textContent = `${paraSep[i]} `;
+    pEl.append(spanEl);
+
+    spanEl.addEventListener("click", highlight);
+
     const pObj = {
       isChecked: false,
     };
-    pEl.style.display = "inline-block";
-    //add spaces
-    if (i < paraSep.length - 1) {
-      pEl.innerHTML = `${paraSep[i]}&nbsp;`;
-    } else {
-      pEl.innerHTML = `${paraSep[i]}`;
-    }
-    pEl.appendChild(spanEl);
+
     function highlight() {
-      console.log(selectEl.options[selectEl.selectedIndex]);
       if (!pObj.isChecked) {
-        spanEl.style.backgroundColor = selectEl.options[selectEl.selectedIndex];
-        console.log(spanEl);
-        pObj.isChecked;
+        spanEl.style.backgroundColor = selectEl.options[selectEl.selectedIndex].text;
+        pObj.isChecked = true;
+      }else{
+        spanEl.style.backgroundColor = "white";
+        spanEl.style.backgroundColor = selectEl.options[selectEl.selectedIndex].text;
+        pObj.isChecked = false;
       }
     }
-    pEl.addEventListener("click", highlight);
-    contentEl.appendChild(pEl);
   }
-  
 
   //add the select element
   const selectEl = document.createElement("select");
   contentEl.appendChild(selectEl);
   //add the options
-  for(let i = 0; i < colours.length; i++){
+  for (let i = 0; i < colours.length; i++) {
     let optionEl = document.createElement("option");
-    console.log(colours[i])
-    optionEl.text = colours[i];  
+    optionEl.text = colours[i];
     selectEl.appendChild(optionEl);
   }
 }
