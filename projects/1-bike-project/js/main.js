@@ -44,21 +44,52 @@ if all are valid{
     blank out all fields
 }
 */
+//may have to change the type of the email input to text instead of email
+//this is due to my browser not letting me submit an invalid email
+//which results in the invalid code never being ran.
 const formEl = document.getElementById("regForm");
-const emailInputEl = document.getElementById("exampleInputEmail1");
 const subBtn = document.getElementsByClassName("btn btn-primary")[0];
+const emailInputEl = document.getElementById("exampleInputEmail1");
+const nameEl = document.getElementById("example-text-input");
+const descEl = document.getElementById("exampleTextarea");
 
 function onSubmit(e) {
-    e.preventDefault()
+  e.preventDefault();
   //check email
-  console.log("working")
   let emailValid;
+  let nameValid;
+  let descValid;
   if (emailInputEl.value.includes("@") && emailInputEl.value.length > 0) {
     emailValid = true;
-    console.log("good")
-  }else{
+  } else {
     emailValid = false;
-    console.log("bad")
+    emailInputEl.style.backgroundColor = "red";
+  }
+  //check name
+  if (nameEl.value.length > 0) {
+    nameValid = true;
+  } else {
+    nameValid = false;
+    nameEl.style.backgroundColor = "red";
+  }
+  //check description
+  if (descEl.value.length > 0) {
+    descValid = true;
+  } else {
+    descValid = false;
+    descEl.style.backgroundColor = "red";
+  }
+  //check all together
+  if (emailValid && nameValid && descValid) {
+    //blank out fields
+    emailInputEl.value = "";
+    emailInputEl.style.backgroundColor = "white";
+    nameEl.value = "";
+    nameEl.style.backgroundColor = "white";
+    descEl.value = "";
+    descEl.style.backgroundColor = "white";
+    //display thank you alert
+    alert("Thank you for filling out the form.");
   }
 }
 
